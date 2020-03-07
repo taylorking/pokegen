@@ -31,7 +31,7 @@ add_executable(pokepack.t ${TEST_SOURCES})
 target_link_libraries(pokepack.t gtest_main)
 add_test(NAME pockepack.t COMMAND pokepack.t)
 
-#include(CodeCoverage)
-#setup_target_for_coverage_gcovr_html(
-#   NAME coverage
-#   EXECUTABLE pokepack.t)
+include(CodeCoverage)
+setup_target_for_coverage_gcovr_html(
+   NAME coverage
+   EXECUTABLE pokepack.t)
