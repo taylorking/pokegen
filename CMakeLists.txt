@@ -15,6 +15,7 @@ if(result)
 endif()
 
 enable_testing()
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 
 set(CMAKE_CXX_STANDARD 14)
 file(GLOB SOURCES PokeGen.cpp PokeGen.h PokeGen.m.cpp)
@@ -26,6 +27,11 @@ add_executable(pokepack ${SOURCES})
 
 file(GLOB TEST_SOURCES PokeGen.t.cpp PokeGen.cpp PokeGen.h)
 add_executable(pokepack.t ${TEST_SOURCES})
-
+# target_compile_definitions(pokepack.t PRIVATE "-fprofile-arc" "-ftest_coverage")
 target_link_libraries(pokepack.t gtest_main)
 add_test(NAME pockepack.t COMMAND pokepack.t)
+
+include(CodeCoverage)
+setup_target_for_coverage_gcovr_html(
+   NAME coverage
+   EXECUTABLE pokepack.t)
